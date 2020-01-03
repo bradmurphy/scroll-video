@@ -1,19 +1,12 @@
-const globby = require('globby')
-const path = require('path')
-
-const files = globby.sync(['./src/js/**/*.js', '!./src/js/library/*'])
-const entry = Object.assign(...files.map((f) => {
-  const i = f.split('/').pop().slice(0, -3)
-  return {
-    [i]: f,
-  }
-}))
+const path = require('path');
 
 module.exports = {
-  entry,
+  entry: {
+    path: path.resolve('./src/js/')
+  },
   output: {
     path: path.resolve('./build/js'),
-    filename: '[name].js',
+    filename: 'index.js',
   },
   module: {
     loaders: [
@@ -27,4 +20,4 @@ module.exports = {
       },
     ],
   },
-}
+};
